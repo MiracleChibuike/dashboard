@@ -1,0 +1,69 @@
+/* Load Google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Asap+Condensed&family=Cabin+Condensed&family=Comfortaa:wght@300..700&family=Dancing+Script&family=Epilogue:ital,wght@0,100..900;1,100..900&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jost&family=Kalam&family=Kanit&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Noto+Sans+Display:wght@600&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Odibee+Sans&family=PT+Sans+Narrow&family=Playwrite+ZA+Guides&family=Poetsen+One&family=Roboto:ital,wght@0,100..900;1,100..900&family=Sansita+Swashed:wght@300..900&family=Signika+Negative:wght@300..700&family=Slabo+27px&family=Syne:wght@400..800&family=Ubuntu:wght@500&family=Winky+Sans:ital,wght@0,300..900;1,300..900&family=Yesteryear&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Nunito", "sans-serif";
+}
+/* Root */
+:root{
+    --clr-dark-main: #020202;
+    --clr-white-bg: #f3f3f3;
+    --clr-light-transparent: rgb(200, 200, 200);
+}
+.parent{
+    background: linear-gradient(rgb(0, 0, 40, 0.5), rgb(0, 0, 50, 0.4)),
+    url(https://i.pinimg.com/736x/fa/e2/7c/fae27c577dd35c69d24422fda47d778d.jpg) no-repeat center/cover;
+    height: 100vh;
+}
+/* Account-container */
+.account_container{
+    display: grid;
+    place-content: center;
+    min-height: 50vh;
+    padding: 25px 0;
+}
+
+.form_container div input{
+    border: 1px solid var(--clr-light-transparent);
+    width:400px;
+    padding: 12px 20px;
+    outline: none;
+    transition: .4s ease-in-out;
+}
+.form_container div input:focus{
+    transform: transition 0.5s ease-in-out;
+    outline: 1px solid var(--clr-dark-main);
+}
+.login button{
+    width: 100%;
+    border: none;
+    color: var(--clr-white-bg);
+    background: var(--clr-dark-main);
+}
+a{
+    font-weight: bold;
+    color: var(--clr-dark-main);
+}
+.iconsSocial i{
+    border: 1px solid var(--clr-light-transparent);
+    padding: 10px;
+    font-size: 1.5rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.password i{
+    position: relative; top: -35px; width: 50px; left: 330px;
+}
+@media screen and (min-width:0) and (max-width: 750px) {
+    .form_container div input{
+        width: 320px;
+    }
+    .password i{
+        position: relative; top: -32px; width: 50px; left: 250px;
+    }
+}
