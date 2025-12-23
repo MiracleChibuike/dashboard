@@ -9,26 +9,42 @@
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
         <!-- Default CSS Link -->
          <link rel="stylesheet" href="dist/assets/css/index.css">
+        <style>
+            .parent{
+                height: 100vh;
+            }
+        </style>
 </head>
 <body>
     <div class="parent">
         <div class="container">
             <div class="account_container">
-               <div class="arrange bg-white p-2 rounded-4 shadow-lg">
+                <!-- Error Modal -->
+                <div class="validation_message text-center p-3 rounded-4 mb-4 bg-danger shadow text-white d-flex justify-content-center align-items-center">
+                    <p style="font-size: 1.7rem;"><i class="fa-solid fa-triangle-exclamation mx-3"></i></p>
+                    <p class="message">Sorry, something went wrong</p>
+                </div>
+                <!-- Success Modal -->
+                <div
+                    class="validation_message_success text-center p-3 rounded-4 mb-4 bg-success shadow text-white d-flex justify-content-center align-items-center">
+                    <p style="font-size: 1.7rem;"><i class="fa-solid fa-circle-check mx-3"></i></p>
+                    <p class="message">Success, you've logged in</p>
+                </div>
+               <div class="arrange p-2 rounded-4 ">
                 <div class="headings text-center">
                     <h2 class="heading">Sign In</h2>
                     <p>Hi, welcome back, you've been missed</p>
                 </div>
                 <div class="form_container mt-4 p-2">
-                    <form action="">
+                    <form action="" id="signInForm">
                         <div class="email mb-4 d-flex flex-column">
                             <label for="userEmail">Email</label>
-                            <input type="email" class=" rounded-4 mt-2" placeholder="example@gmail.com" id="userEmail" required>
+                            <input type="email" name="user_Email" class=" rounded-4 mt-2" placeholder="example@gmail.com" id="userEmail" required>
                         </div>
                         <div class="password mb-3 d-flex flex-column">
                             <label for="userPassword">Password</label>
-                            <input type="password" class=" rounded-4 mt-2" placeholder="************" id="userPassword" required>
-                            <i class="fa-solid fa-eye-slash text-secondary d-flex justify-content-end "></i>
+                            <input type="password" name="user_Password" class=" rounded-4 mt-2" placeholder="************" id="userPassword" required>
+                            <i onclick="togglePassword()" class="fa-solid fa-eye-slash text-secondary d-flex justify-content-end "></i>
                         </div>
                         <div class="forget-password d-flex justify-content-end">
                             <a href="#">Forgot Password?</a>
@@ -45,7 +61,7 @@
                             </div>
                         </div>
                         <div class="account_create">
-                            <p class="text-center mt-4">Don't have an account? <a href="#">Sign Up</a></p>
+                            <p class="text-center mt-4">Don't have an account? <a href="sign_up.html">Sign Up</a></p>
                         </div>
                     </form>
                 </div>
@@ -54,6 +70,10 @@
         </div>
     </div>
 </body>
+
 <!-- FA LINK -->
 <script src="https://kit.fontawesome.com/9b5c4c6b23.js" crossorigin="anonymous"></script>
+
+<!-- Default JS Link -->
+ <script src="dist/assets/js/index.js"></script>
 </html>

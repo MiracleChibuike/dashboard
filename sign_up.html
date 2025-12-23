@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - Zap Profile</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- Default CSS Link -->
+    <link rel="stylesheet" href="dist/assets/css/index.css">
+</head>
+
+<body>
+    <div class="parent">
+        <div class="container">
+            <div class="account_container">
+                <!-- Error Modal -->
+                <div
+                    class="validation_message text-center p-3 rounded-4 mb-4 bg-danger shadow text-white d-flex justify-content-center align-items-center">
+                    <p style="font-size: 1.7rem;"><i class="fa-solid fa-triangle-exclamation mx-3"></i></p>
+                    <p class="message_error"></p>
+                </div>
+                <!-- Success Modal -->
+                <div
+                    class="validation_message_success text-center p-3 rounded-4 mb-4 bg-success shadow text-white d-flex justify-content-center align-items-center">
+                    <p style="font-size: 1.7rem;"><i class="fa-solid fa-circle-check mx-3"></i></p>
+                    <p class="message_success"></p>
+                </div>
+                <div class="arrange p-2 rounded-4 ">
+                    <div class="headings text-center">
+                        <h2 class="heading">Create Account</h2>
+                        <p>Fill your information below or register <br> with your social account</p>
+                    </div>
+                    <div class="form_container mt-4 p-2">
+                        <form action="" id="signUpForm">
+                            <!-- Name -->
+                            <div class="email mb-4 d-flex flex-column">
+                                <label for="userName">Name</label>
+                                <input type="text" name="user_Name" class=" rounded-4 mt-2" placeholder="Onyia Miracle" id="userName" required>
+                            </div>
+                            <div class="email mb-4 d-flex flex-column">
+                                <label for="userEmail">Email</label>
+                                <input type="email" name="user_Email" class=" rounded-4 mt-2" placeholder="example@gmail.com"
+                                    id="userEmail" required>
+                            </div>
+                            <div class="password mb-1 d-flex flex-column">
+                                <label for="userPassword">Password</label>
+                                <input type="password" name="user_Password" class=" rounded-4 mt-2" placeholder="************"
+                                    id="userPassword" required>
+                                <i onclick="togglePassword()" class="fa-solid fa-eye-slash text-secondary d-flex justify-content-end "></i>
+                            </div>
+                            <p>
+                                <input type="checkbox" id="check">
+                                <label for="check" class="p-2">Agree with <a href="#">Terms & Conditions</a></label>
+                            </p>
+                            <!-- <div class="forget-password d-flex justify-content-end">
+                                <a href="#">Forgot Password?</a>
+                            </div> -->
+                            <div class="login mt-5">
+                                <button type="submit" id="signButton" class="rounded-5 p-3">Sign Up</button>
+                            </div>
+                            <div class="text-center mt-5">
+                                <p>Or sign up with </p>
+                                <div class="iconsSocial mt-4">
+                                    <i class="fa-brands fa-google mx-3  "></i>
+                                    <i class="fa-brands fa-facebook-f mx-3  "></i>
+                                    <i class="fa-brands fa-apple mx-3  "></i>
+                                </div>
+                            </div>
+                            <div class="account_create">
+                                <p class="text-center mt-4">Already have an account? <a href="index.html">Sign in</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Firebase Script Module -->
+     <script type="module" src="dist/assets/js/firebase_sign.js"></script>
+</body>
+<!-- FA LINK -->
+<script src="https://kit.fontawesome.com/9b5c4c6b23.js" crossorigin="anonymous"></script>
+
+<!-- Default JS Link -->
+<script src="dist/assets/js/sign_up.js"></script>
+
+</html>

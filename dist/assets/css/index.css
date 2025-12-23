@@ -14,9 +14,41 @@
     --clr-light-transparent: rgb(200, 200, 200);
 }
 .parent{
-    background: linear-gradient(rgb(0, 0, 40, 0.5), rgb(0, 0, 50, 0.4)),
-    url(https://i.pinimg.com/736x/fa/e2/7c/fae27c577dd35c69d24422fda47d778d.jpg) no-repeat center/cover;
-    height: 100vh;
+    background: var(--clr-white-bg);
+    /* height: 100vh; */
+    /* padding: 12px 0; */
+}
+/* Custom Checkbox */
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--clr-light-transparent);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    background: white;
+    position: relative;
+    top: 4px;
+}
+
+input[type="checkbox"]:hover {
+    border-color: var(--clr-dark-main);
+}
+
+input[type="checkbox"]:checked {
+    background: var(--clr-dark-main);
+    border-color: var(--clr-dark-main);
+}
+
+input[type="checkbox"]:checked::after {
+    content: "✓";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--clr-white-bg);
+    font-size: 14px;
 }
 /* Account-container */
 .account_container{
@@ -25,23 +57,32 @@
     min-height: 50vh;
     padding: 25px 0;
 }
-
+.arrange{
+    background: var(--clr-white-bg);
+}
+label{
+    font-weight: bold;
+}
 .form_container div input{
     border: 1px solid var(--clr-light-transparent);
     width:400px;
     padding: 12px 20px;
     outline: none;
-    transition: .4s ease-in-out;
+    transition: .3s ease-in-out;
 }
 .form_container div input:focus{
-    transform: transition 0.5s ease-in-out;
-    outline: 1px solid var(--clr-dark-main);
+    transform: translateY(-5px);
+    border: 1px solid var(--clr-dark-main);
 }
 .login button{
     width: 100%;
     border: none;
     color: var(--clr-white-bg);
     background: var(--clr-dark-main);
+    transition: .5s ease;
+}
+.login button:hover{
+    transform: scale(1.1);
 }
 a{
     font-weight: bold;
@@ -54,10 +95,41 @@ a{
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    cursor: pointer;
+    transition: 0.5s ease-in-out;
+}
+.iconsSocial i:hover{
+    transform: translateY(-7px);
+    background: var(--clr-dark-main);
+    color: var(--clr-white-bg);
 }
 
 .password i{
     position: relative; top: -35px; width: 50px; left: 330px;
+    cursor: pointer;
+}
+
+/* Validatiion Message */
+.validation_message{
+    transition: top .3s ease-in-out;
+    position: absolute;
+    top: -99vh;
+    /* content-visibility: hidden; */
+}
+.validation_message.show{
+    top: 0;
+    /* content-visibility: visible; */
+}
+/* Success Message */
+.validation_message_success{
+    transition: left .3s ease-in-out;
+    position: absolute;
+    left: -99vw;
+    /* content-visibility: hidden; */
+}
+.validation_message_success.showMessage{
+    left: 25px;
+    /* content-visibility: visible; */
 }
 @media screen and (min-width:0) and (max-width: 750px) {
     .form_container div input{
@@ -66,4 +138,8 @@ a{
     .password i{
         position: relative; top: -32px; width: 50px; left: 250px;
     }
+    .validation_message, .validation_message_success{
+        width: 90%;
+    }
+  
 }
