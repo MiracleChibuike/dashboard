@@ -3,11 +3,19 @@
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-analytics.js";
+          import {
+            getAuth,
+            signInWithEmailAndPassword,
+            createUserWithEmailAndPassword,
+            signOut,
+            onAuthStateChanged,
+          } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
+
 //   TODO: Add SDKs for Firebase products that you want to use
   import {
     getFirestore,
-    addDoc,
-    collection,
+    doc, 
+    setDoc,
     serverTimestamp,
   } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
   // https://firebase.google.com/docs/web/setup#available-libraries
@@ -28,6 +36,7 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
   const analytics = getAnalytics(app);
+  const auth = getAuth(app);
 
 
   let docId = null;
@@ -38,25 +47,34 @@ let val_Message_Success = document.querySelector(".validation_message_success");
 // console.log(val_Message_Success)
 formSignUp.addEventListener("submit", async(e) => {
     e.preventDefault();
+
+      const userData = new FormData(formSignUp);
+      const email = userData.get("user_Email");
+      const password = userData.get("user_Password");
+
     try {
      const submitBtn = document.getElementById("signButton");
     submitBtn.disabled = true;
     submitBtn.textContent = "Signing up....";
+    submitBtn.style.cursor = "not-allowed";
     submitBtn.style.opacity = ".5"    
-      const userData = new FormData(formSignUp);
       // console.log(userData.get('user_Email'));
-      const data = userData.forEach((value, key) => {
-        userData[key] = value;
-      });
-      // Create a db with name 'users' and store the object in firebase
-      const usersRef = await addDoc(collection(db, "users"), {
-        ...userData,
+      // const data = userData.forEach((value, key) => {
+      //   userData[key] = value;
+      // });
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      // Create a db with name 'users' and store sensitive data in firebase
+      const usersRef = await setDoc(doc(db, "users", user.uid), {
+        user_Name: userData.get("user_Name"),
+        user_Email: userData.get("user_Email"),
         createdAt: serverTimestamp(),
       });
-      // console.log(userData);
+      console.log(`User Created: ${user.uid}`);
+      // console.log(user);
 
-      // Store doc Id for later redirect to dashboard
-       docId = usersRef.id;
+      // Store userId Id for later redirect to dashboard
+       docId = user.uid;
 
       // Show Pop up
       val_Message_Success.classList.add("showMessage");
@@ -80,7 +98,8 @@ formSignUp.addEventListener("submit", async(e) => {
       const submitBtn = document.getElementById("signButton");
       submitBtn.disabled = false;
       submitBtn.textContent = "Sign Up";
-      submitBtn.style.opacity = "1"
+      submitBtn.style.opacity = "1";
+      submitBtn.style.cursor = "pointer";
     }
   
 });

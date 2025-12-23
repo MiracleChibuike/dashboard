@@ -9,4 +9,5 @@ const togglePassword = () => {
     }else{
         userPassword.type = "password"
     }
-}
+};
+
