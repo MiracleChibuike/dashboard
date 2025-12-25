@@ -7,6 +7,11 @@
     box-sizing: border-box;
     font-family: "Nunito", "sans-serif";
 }
+
+::selection{
+    color: var(--clr-white-bg);
+    background: var(--clr-dark-main);
+}
 /* Root */
 :root{
     --clr-dark-main: #020202;

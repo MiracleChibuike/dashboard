@@ -44,7 +44,7 @@ formLogIn.addEventListener("submit", async(e) => {
     try {
           const submitBtn = document.getElementById("logInButton");
           submitBtn.disabled = true;
-          submitBtn.textContent = "Signing up....";
+          submitBtn.textContent = "Signing in....";
           submitBtn.style.cursor = "not-allowed";
           submitBtn.style.opacity = ".5";  
       const userDetails = await signInWithEmailAndPassword(
@@ -61,7 +61,7 @@ formLogIn.addEventListener("submit", async(e) => {
       val_Message_Success.scrollIntoView({ behavior: "smooth" });
       document.querySelector(
         ".message_success"
-      ).textContent = `Sign up successful`;
+      ).textContent = `Sign in successful`;
       setTimeout(() => {
         val_Message_Success.classList.remove("showMessage");
         window.location.href = `dashboard.html?userId=${encodeURIComponent(
@@ -79,7 +79,7 @@ formLogIn.addEventListener("submit", async(e) => {
     }finally{
         const submitBtn = document.getElementById("logInButton");
         submitBtn.disabled = false;
-      submitBtn.textContent = "Sign Up";
+      submitBtn.textContent = "Sign In";
       submitBtn.style.opacity = "1";
       submitBtn.style.cursor = "pointer";
     }
