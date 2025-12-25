@@ -172,6 +172,12 @@ backNav.addEventListener("click", () => {
   window.location.href = "sign_up.html";
 });
 
+// Navigate to Edit Profile
+let editProfileNav = document.getElementById("editProfile");
+editProfileNav.addEventListener("click", () => {
+  window.location.href = 'edit_profile.html'
+})
+
 document.addEventListener("DOMContentLoaded", () => {
   const header = document.querySelector(".header");
 

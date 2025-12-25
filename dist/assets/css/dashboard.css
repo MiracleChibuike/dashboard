@@ -4,6 +4,7 @@
     --clr-dark-main: #020202;
     --clr-white-bg: #f3f3f3;
     --clr-light-transparent: rgb(200, 200, 200);
+    --clr-custom: rgb(150, 10, 10);
 }
 /* Loader */
 .loader {
@@ -53,7 +54,7 @@
     content-visibility: hidden;
 }
 
-.header i:hover{
+.arrow-back i:hover{
     transform: translateX(-10px);
 }
 .sideBarLink{
@@ -72,6 +73,10 @@
   top: 0; */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 
+}
+
+.active{
+  color: var(--clr-custom);
 }
 @media screen and (min-width: 0) and (max-width: 750px) {
   .nav{

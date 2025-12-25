@@ -68,14 +68,14 @@ input[type="checkbox"]:checked::after {
 label{
     font-weight: bold;
 }
-.form_container div input{
+.form_container div input, .form_container div select{
     border: 1px solid var(--clr-light-transparent);
     width:400px;
     padding: 12px 20px;
     outline: none;
     transition: .3s ease-in-out;
 }
-.form_container div input:focus{
+.form_container div input:focus, .form_container div select:focus{
     transform: translateY(-5px);
     border: 1px solid var(--clr-dark-main);
 }

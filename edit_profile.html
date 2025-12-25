@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- Default CSS -->
+    <link rel="stylesheet" href="dist/assets/css/index.css">
+    <!-- Loader CSS -->
+    <link rel="stylesheet" href="dist/assets/css/dashboard.css">
+    <!-- Style parent -->
+    <style>
+        .parent {
+            height: 100vh;
+            overflow-y: scroll;
+        }
+
+        .form_container {
+            margin: 90px 0;
+        }
+
+        .form_container div input,
+        .form_container div select {
+            border: 1px solid var(--clr-light-transparent);
+            width: 100%;
+            padding: 12px 20px;
+            outline: none;
+            transition: .3s ease-in-out;
+        }
+        .cameraFlow{
+            font-size: 1.2rem;
+            position: relative;
+            top: 35px;
+            left: -25px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="parent">
+        <div class="container">
+            <!-- Error Modal -->
+            <div
+                class="validation_message text-center p-3 rounded-4 mb-4 bg-danger shadow text-white d-flex justify-content-center align-items-center">
+                <p style="font-size: 1.7rem;"><i class="fa-solid fa-triangle-exclamation mx-3"></i></p>
+                <p class="message_error"></p>
+            </div>
+            <!-- Success Modal -->
+            <div
+                class="validation_message_success text-center p-3 rounded-4 mb-4 bg-success shadow text-white d-flex justify-content-center align-items-center">
+                <p style="font-size: 1.7rem;"><i class="fa-solid fa-circle-check mx-3"></i></p>
+                <p class="message_success">Success, you've logged in</p>
+            </div>
+            <div class="header d-flex align-items-center justify-content-between p-3 mb-4 pt-4">
+                <div class="arrow-back">
+                    <i style="transition: .4s; cursor: pointer;" class="fa-solid fa-arrow-left"></i>
+                </div>
+                <div class="profile_desc">
+                    <h2>Edit Profile</h2>
+                </div>
+                <div class="settings_bar">
+                    <i class="fa-solid fa-check text-success"></i>
+                </div>
+            </div>
+            <!-- <span class="loader" id="loaderProfile"></span> -->
+            <div class="text-center">
+                <div class="img_user">
+                    <img width="120px" height="120px" class="rounded-circle"
+                        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D"
+                        alt="">
+                        <span class="cameraFlow"><i class="fa-solid fa-camera bg-white p-2 rounded-5"></i></span>
+                </div>
+            </div>
+            <!-- Form - User -->
+            <div class="form_container mt-4 p-2">
+                <form action="" id="signInForm">
+                    <div class="name mb-4 d-flex flex-column">
+                        <label for="userName">Name</label>
+                        <input type="text" name="user_Namel" class=" rounded-4 mt-2" placeholder="Miracle Chibuike"
+                            id="userName" required>
+                    </div>
+                    <div class="email mb-3 d-flex flex-column">
+                        <label for="userEmail">Email</label>
+                        <input type="email" name="user_Email" class=" rounded-4 mt-2" placeholder="youremail.com"
+                            id="userEmail" required>
+                    </div>
+                    <div class="username">
+                        <div class="mb-4 d-flex flex-column">
+                            <label for="userUsername">Username</label>
+                            <input type="text" name="user_Username" class=" rounded-4 mt-2" placeholder="miracle123"
+                                id="userUsername" required>
+                        </div>
+                        <div class="password">
+                            <div class="mb-4 d-flex flex-column">
+                                <label for="userPassword">Password</label>
+                                <input type="password" name="user_Password" class=" rounded-4 mt-2"
+                                    placeholder="************" id="userPassword" required>
+                                <i id="showEdit"
+                                    class="fa-solid fa-eye-slash text-secondary d-flex justify-content-end "></i>
+                            </div>
+                        </div>
+                        <div class="country">
+                            <div class="mb-4 d-flex flex-column">
+                                <label for="countrySelect">Country</label>
+                                <select class=" rounded-4 mt-2" name="" id="countrySelect">
+                                    <option value="" selected>Select your country</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="phone">
+                            <div class="mb-4 d-flex flex-column">
+                                <label for="phoneNumber">Phone Number</label>
+                                <div class="d-flex">
+                                    <select class="rounded-4 mt-2 me-2" name="phone_code" id="phoneNumberSelect"
+                                        style="width: 30%;">
+                                        <option value="" selected>+1</option>
+                                    </select>
+                                    <input type="tel" name="phone_number" class="rounded-4 mt-2"
+                                        placeholder="Enter phone number" id="phoneNumberInput" style="flex: 1;"
+                                        required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+            </form>
+        </div>
+        <!-- Nav Bar -->
+        <div class="nav mb-3 mt-5 d-flex justify-content-around align-items-center p-3 rounded-5 bg-light shadow">
+            <div class="nav_item">
+                <i class="fa-solid fa-home" id="homeBase"></i>
+            </div>
+            <div class="nav_item">
+                <i class="fa-regular fa-message"></i>
+            </div>
+            <div class="nav_item" id="editProfile">
+                <i class="fa-regular fa-user active"></i>
+            </div>
+        </div>
+
+    </div>
+    </div>
+    <!-- Dashboard Script - Firebase -->
+    <script type="module" src="dist/assets/js/editProfile.js"></script>
+</body>
+<!-- FA LINK -->
+<script src="https://kit.fontawesome.com/9b5c4c6b23.js" crossorigin="anonymous"></script>
+
+</html>
