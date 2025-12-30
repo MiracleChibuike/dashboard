@@ -112,6 +112,7 @@ const auth = getAuth(app);
 let userName = document.querySelector(".userName");
 let userEmail = document.querySelector(".userEmail");
 let val_Container = document.querySelector(".validation_message");
+let signOutModall = document.querySelector(".validation_message_signOut");
 let loader = document.getElementById("loaderProfile");
 let userCard = document.getElementById("userCard");
 
@@ -165,6 +166,13 @@ const loadUserData = () => {
 };
 
 document.addEventListener("DOMContentLoaded", loadUserData);
+
+// Log Out
+document.getElementById("logOut").addEventListener("click", () => {
+  signOut(auth);
+  alert("Sign Out Succesful");
+        window.location.href = "index.html";
+})
 
 // Add an Event Listener to go back
 let backNav = document.querySelector(".arrow-back");

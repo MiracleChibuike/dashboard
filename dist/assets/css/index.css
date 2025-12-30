@@ -115,7 +115,7 @@ a{
 }
 
 /* Validatiion Message */
-.validation_message{
+.validation_message, .validation_message_signOut{
     transition: top .3s ease-in-out;
     position: absolute;
     top: -99vh;
@@ -124,6 +124,9 @@ a{
 .validation_message.show{
     top: 0;
     /* content-visibility: visible; */
+}
+.validation_message_signOut.showModal{
+    top: 0;
 }
 /* Success Message */
 .validation_message_success{

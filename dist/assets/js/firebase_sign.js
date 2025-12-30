@@ -9,6 +9,8 @@
             createUserWithEmailAndPassword,
             signOut,
             onAuthStateChanged,
+            GithubAuthProvider,
+            signInWithPopup,
           } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
 
 //   TODO: Add SDKs for Firebase products that you want to use
@@ -102,4 +104,38 @@ formSignUp.addEventListener("submit", async(e) => {
       submitBtn.style.cursor = "pointer";
     }
   
+});
+
+// Sign in with GitHub
+// import { GithubAuthProvider } from "firebase/auth";
+
+const provider = new GithubAuthProvider();
+// import { getAuth, signInWithPopup, GithubAuthProvider } from "firebase/auth";
+
+document.getElementById("apple").addEventListener("click", () => {
+  // const auth = getAuth();
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      // This gives you a GitHub Access Token. You can use it to access the GitHub API.
+      const credential = GithubAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      console.log(token)
+      // The signed-in user info.
+      const user = result.user;
+      console.log(user);
+      // IdP data available using getAdditionalUserInfo(result)
+      // ...
+    })
+    .catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      const email = error.customData.email;
+      console.log(email)
+      // The AuthCredential type that was used.
+      const credential = GithubAuthProvider.credentialFromError(error);
+      // ...
+      console.log(error)
+    });
 });
