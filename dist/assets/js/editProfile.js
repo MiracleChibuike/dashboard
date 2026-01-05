@@ -129,9 +129,10 @@ const togglePassword = () => {
   }
 };
 
-document.getElementById("showEdit").addEventListener("click", togglePassword);
+// document.getElementById("showEdit").addEventListener("click", togglePassword);
 
 // Add Edit Status
+let editLoader = document.getElementById("updateLoader");
 let val_Container = document.querySelector(".validation_message");
 let val_Message_Success = document.querySelector(".validation_message_success");
 let userImg = document.getElementById("userImg");
@@ -208,7 +209,7 @@ updateIcon.addEventListener("click", async (event) => {
   console.log(allInputs);
   if (isUploading) return; // 🚨 prevents stack overflow
   isUploading = true;
-
+  editLoader.style.visibility = "visible"
   try {
     const imageURL = localStorage.getItem("userProfileUrl");
 
@@ -243,6 +244,7 @@ updateIcon.addEventListener("click", async (event) => {
          val_Container.classList.remove("show");
        }, 7000);
   } finally {
+        editLoader.style.visibility = "hidden";
     isUploading = false;
     fileInput.value = ""; // ⭐ IMPORTANT
   }
