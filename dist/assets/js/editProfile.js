@@ -156,14 +156,15 @@ const getInputs = () => [
 ];
 
 // Add the image URL if user has already uploaded an image before
-const isUserUploadedImageBefore = localStorage.getItem("userProfileUrl");
-const userFromProvider = localStorage.getItem("userProfile");
-if (isUserUploadedImageBefore || userFromProvider) {
-  userImg.src = isUserUploadedImageBefore || userFromProvider
-}else{
-  userImg.src = ""
-}
-
+  const getUserImage = localStorage.getItem("userProfile");
+     const userImageFromEdit = localStorage.getItem("userProfileUrl");
+      if (userImageFromEdit) {
+        userImg.src = userImageFromEdit;
+      }else if (getUserImage) {
+        userImg.src = getUserImage
+      }else{
+        userImg.src = ""
+      }
 // Check for users and pre-fill their info
 
 fileInput.addEventListener("change", async (event) => {
@@ -174,9 +175,9 @@ fileInput.addEventListener("change", async (event) => {
     reader.onload = (e) => {
       const imageURL = e.target.result;
       localStorage.setItem("userProfileUrl", imageURL);
-      console.log({
-        imageURL,
-      });
+      // console.log({
+      //   imageURL,
+      // });
       // Chnage the image src to the user's image selection
       userImg.src = e.target.result;
     };

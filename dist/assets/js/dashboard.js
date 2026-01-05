@@ -158,6 +158,10 @@ const loadUserData = () => {
      const userImageFromEdit = localStorage.getItem("userProfileUrl");
       if (userImageFromEdit) {
         userProfile.src = userImageFromEdit;
+      }else if (getUserImage) {
+        userProfile.src = getUserImage
+      }else{
+        userProfile.src = ""
       }
 
       userCard.style.contentVisibility = "visible";
