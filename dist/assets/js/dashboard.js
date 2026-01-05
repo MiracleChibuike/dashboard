@@ -115,6 +115,7 @@ let val_Container = document.querySelector(".validation_message");
 let signOutModall = document.querySelector(".validation_message_signOut");
 let loader = document.getElementById("loaderProfile");
 let userCard = document.getElementById("userCard");
+let userProfile = document.getElementById("userImageProfile");
 
 
 // Checks for a valid user
@@ -153,6 +154,11 @@ const loadUserData = () => {
       // Populate UI
       userName.textContent = mainData.user_Name;
       userEmail.textContent = mainData.user_Email;
+     const getUserImage = localStorage.getItem("userProfile");
+     const userImageFromEdit = localStorage.getItem("userProfileUrl");
+      if (userImageFromEdit) {
+        userProfile.src = userImageFromEdit;
+      }
 
       userCard.style.contentVisibility = "visible";
 

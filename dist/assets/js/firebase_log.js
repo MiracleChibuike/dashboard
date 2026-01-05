@@ -7,10 +7,13 @@ import {
   createUserWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  GithubAuthProvider,
+  signInWithPopup,
 } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
 import {
   getFirestore,
-  getDocs,
+  getDoc,
+  doc,
   serverTimestamp,
 } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
 
@@ -83,4 +86,62 @@ formLogIn.addEventListener("submit", async(e) => {
       submitBtn.style.opacity = "1";
       submitBtn.style.cursor = "pointer";
     }
-})
+});
+
+// Ensure Doc Exists for easy recognition across pages
+const ensureUserDoc = async (user) => {
+  if (!user) return;
+
+  const userRef = doc(db, "users", user.uid);
+  const snap = await getDoc(userRef);
+
+  if (!snap.exists()) {
+    await setDoc(userRef, {
+      uid: user.uid,
+      user_Name: user.displayName || "GitHub User",
+      user_Email: user.email,
+      photoURL: user.photoURL || "",
+      authProvider: user.providerData[0]?.providerId, // "github.com"
+      createdAt: serverTimestamp(),
+    });
+  }
+};
+
+// Sign in with GitHub
+// import { GithubAuthProvider } from "firebase/auth";
+
+const provider = new GithubAuthProvider();
+
+document.getElementById("github").addEventListener("click", () => {
+  signInWithPopup(auth, provider)
+    .then(async (result) => {
+      const credential = GithubAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+
+      const user = result.user;
+
+      // ✅ IMPORTANT: Ensure Firestore user exists
+      await ensureUserDoc(user);
+
+      let userName = user.displayName;
+      let userEmail = user.email;
+      let userProfileImgURL = user.photoURL;
+
+      localStorage.setItem("userProfile", userProfileImgURL);
+
+      val_Message_Success.classList.add("showMessage");
+      val_Message_Success.scrollIntoView({ behavior: "smooth" });
+
+      document.querySelector(
+        ".message_success"
+      ).textContent = `User authenticated as ${userEmail}`;
+
+      setTimeout(() => {
+        val_Message_Success.classList.remove("showMessage");
+        window.location.href = `dashboard.html`;
+      }, 4000);
+    })
+    .catch((error) => {
+      console.error("GitHub sign-in error:", error);
+    });
+});

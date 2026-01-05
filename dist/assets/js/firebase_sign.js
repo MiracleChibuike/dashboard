@@ -16,7 +16,8 @@
 //   TODO: Add SDKs for Firebase products that you want to use
   import {
     getFirestore,
-    doc, 
+    doc,
+   getDoc,
     setDoc,
     serverTimestamp,
   } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
@@ -106,36 +107,60 @@ formSignUp.addEventListener("submit", async(e) => {
   
 });
 
+// Ensure Doc Exists for easy recognition across pages
+const ensureUserDoc = async (user) => {
+  if (!user) return;
+
+  const userRef = doc(db, "users", user.uid);
+  const snap = await getDoc(userRef);
+
+  if (!snap.exists()) {
+    await setDoc(userRef, {
+      uid: user.uid,
+      user_Name: user.displayName || "GitHub User",
+      user_Email: user.email,
+      photoURL: user.photoURL || "",
+      authProvider: user.providerData[0]?.providerId, // "github.com"
+      createdAt: serverTimestamp(),
+    });
+  }
+};
+
 // Sign in with GitHub
 // import { GithubAuthProvider } from "firebase/auth";
 
 const provider = new GithubAuthProvider();
-// import { getAuth, signInWithPopup, GithubAuthProvider } from "firebase/auth";
 
-document.getElementById("apple").addEventListener("click", () => {
-  // const auth = getAuth();
+document.getElementById("github").addEventListener("click", () => {
   signInWithPopup(auth, provider)
-    .then((result) => {
-      // This gives you a GitHub Access Token. You can use it to access the GitHub API.
+    .then(async (result) => {
       const credential = GithubAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
-      console.log(token)
-      // The signed-in user info.
+
       const user = result.user;
-      console.log(user);
-      // IdP data available using getAdditionalUserInfo(result)
-      // ...
+
+      // ✅ IMPORTANT: Ensure Firestore user exists
+      await ensureUserDoc(user);
+
+      let userName = user.displayName;
+      let userEmail = user.email;
+      let userProfileImgURL = user.photoURL;
+
+      localStorage.setItem("userProfile", userProfileImgURL);
+
+      val_Message_Success.classList.add("showMessage");
+      val_Message_Success.scrollIntoView({ behavior: "smooth" });
+
+      document.querySelector(
+        ".message_success"
+      ).textContent = `Successfully signed in with GitHub as ${userEmail}`;
+
+      setTimeout(() => {
+        val_Message_Success.classList.remove("showMessage");
+        window.location.href = `dashboard.html`;
+      }, 4000);
     })
     .catch((error) => {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // The email of the user's account used.
-      const email = error.customData.email;
-      console.log(email)
-      // The AuthCredential type that was used.
-      const credential = GithubAuthProvider.credentialFromError(error);
-      // ...
-      console.log(error)
+      console.error("GitHub sign-in error:", error);
     });
 });
